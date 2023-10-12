@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<configuration scan="true" scanPeriod="60 seconds" debug="false">
+    <!-- 工程名/项目名 -->
+    <contextName>nettys</contextName>
+
+    <timestamp key="bySecond" datePattern="yyyyMMdd'T'HHmmss"/>
+
+    <!--把>=debug的日志输出到控制台 -->
+    <appender name="SDTOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%-4relative %date{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{35} - %msg %n</pattern>
+        </encoder>
+    </appender>
+
+    <!--<appender name="INFO_FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">-->
+    <!--    <file>logs/info.log</file>-->
+    <!--    <rollingPolicy name="50M_FILE" class="ch.qos.logback.core.rolling.FixedWindowRollingPolicy">-->
+    <!--        <fileNamePattern>logs/info.%i.log.zip</fileNamePattern>-->
+    <!--        <minIndex>1</minIndex>-->
+    <!--        <maxIndex>500</maxIndex>-->
+    <!--    </rollingPolicy>-->
+    <!--    <triggeringPolicy class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">-->
+    <!--        <maxFileSize>200MB</maxFileSize>-->
+    <!--    </triggeringPolicy>-->
+    <!--    <encoder>-->
+    <!--        <pattern>%-4relative %date{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{35} - %msg%n</pattern>-->
+    <!--    </encoder>-->
+    <!--</appender>-->
+
+    <!--<appender name="ERROR_FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">-->
+    <!--    <file>logs/error.log</file>-->
+    <!--    <rollingPolicy name="50M_FILE" class="ch.qos.logback.core.rolling.FixedWindowRollingPolicy">-->
+    <!--        <fileNamePattern>logs/error.%i.log.zip</fileNamePattern>-->
+    <!--        <minIndex>1</minIndex>-->
+    <!--        <maxIndex>100</maxIndex>-->
+    <!--    </rollingPolicy>-->
+    <!--    <triggeringPolicy class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">-->
+    <!--        <maxFileSize>200MB</maxFileSize>-->
+    <!--    </triggeringPolicy>-->
+    <!--    <encoder>-->
+    <!--        <pattern>%-4relative %date{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{35} - %msg%n</pattern>-->
+    <!--    </encoder>-->
+    <!--    <filter class="ch.qos.logback.classic.filter.LevelFilter">-->
+    <!--        <level>ERROR</level>-->
+    <!--        <onMatch>ACCEPT</onMatch>-->
+    <!--        <onMismatch>DENY</onMismatch>-->
+    <!--    </filter>-->
+    <!--</appender>-->
+
+    <logger name="org.yahve" level="DEBUG"/>
+    <!-- 开发阶段使用DEBUG  生产环境使用INFO -->
+    　<root level="INFO">
+        <appender-ref ref="SDTOUT" />
+    　</root>
+
+</configuration>
