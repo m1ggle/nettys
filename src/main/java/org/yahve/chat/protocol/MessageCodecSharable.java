@@ -6,6 +6,7 @@ package org.yahve.chat.protocol;
  * @describe
  * @date 2023/10/13
  */
+
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandler;
 import io.netty.channel.ChannelHandlerContext;
@@ -14,9 +15,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.yahve.chat.message.Message;
 
 import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
 import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
 import java.util.List;
 
 /**
@@ -50,12 +49,13 @@ public class MessageCodecSharable extends MessageToMessageCodec<ByteBuf, Message
         out.writeInt(msg.getSequenceId());   // 4字节的 请求序号 【大端】
         out.writeByte(0xff);                 // 1字节的 对其填充，只为了非消息内容 是2的整数倍
 
-        // 处理内容 用对象流包装字节数组 并写入
-        ByteArrayOutputStream bos = new ByteArrayOutputStream(); // 访问数组
-        ObjectOutputStream oos = new ObjectOutputStream(bos);    // 用对象流 包装
-        oos.writeObject(msg);
+        // byte[] serializable =
+        // // 处理内容 用对象流包装字节数组 并写入
+        // ByteArrayOutputStream bos = new ByteArrayOutputStream(); // 访问数组
+        // ObjectOutputStream oos = new ObjectOutputStream(bos);    // 用对象流 包装
+        // oos.writeObject(msg);
 
-        byte[] bytes = bos.toByteArray();
+        byte[] bytes = Algotithm.Java.serializable(msg);
 
         // 写入内容 长度
         out.writeInt(bytes.length);
@@ -81,12 +81,13 @@ public class MessageCodecSharable extends MessageToMessageCodec<ByteBuf, Message
         final byte[] bytes = new byte[length];
         in.readBytes(bytes, 0, length);
 
-        // 处理内容
-        final ByteArrayInputStream bis = new ByteArrayInputStream(bytes);
-        final ObjectInputStream ois = new ObjectInputStream(bis);
 
-        // 转成 Message类型
-        Message message = (Message) ois.readObject();
+        // // 处理内容
+        // final ByteArrayInputStream bis = new ByteArrayInputStream(bytes);
+        // final ObjectInputStream ois = new ObjectInputStream(bis);
+        //
+        // // 转成 Message类型
+         Message message = Algotithm.Java.deserializable(Message.class, bytes);
 
         log.debug("{},{},{},{},{},{}",magicNum, version, serializerType, messageType, sequenceId, length);
         log.debug("{}", message);
