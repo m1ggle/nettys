@@ -19,8 +19,8 @@ public class LogUtil {
 
         StringBuilder builder = new StringBuilder(rows * 80 * 2);
         builder.append("read index: " ).append(byteBuf.readerIndex())
-                .append("wirte index:").append(byteBuf.writerIndex())
-                .append("capacity:").append(byteBuf.capacity())
+                .append(" wirte index: ").append(byteBuf.writerIndex())
+                .append(" capacity: ").append(byteBuf.capacity())
                 .append(NEWLINE);
 
         appendPrettyHexDump(builder,byteBuf);

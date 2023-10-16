@@ -49,7 +49,7 @@
 
     <logger name="org.yahve" level="DEBUG"/>
     <!-- 开发阶段使用DEBUG  生产环境使用INFO -->
-    　<root level="INFO">
+    　<root level="DEBUG">
         <appender-ref ref="SDTOUT" />
     　</root>
 
